@@ -30,7 +30,8 @@ passport.deserializeUser(User.deserializeUser())
 
 
 app.post('/register', (req, res) => {
-    const createdUser = new User({ email: req.body.email })
+    const createdUser = new User({ username: req.body.username })
+    
     User.register(createdUser, req.body.password, (error, user) => {
         if(error) {
             console.log(error)
@@ -42,6 +43,15 @@ app.post('/register', (req, res) => {
     })
 })
 
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+}), (req, res) => {})
+
+app.get('/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
+})
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
