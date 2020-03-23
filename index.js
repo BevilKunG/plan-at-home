@@ -29,6 +29,18 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 
+app.post('/register', (req, res) => {
+    const createdUser = new User({ email: req.body.email })
+    User.register(createdUser, req.body.password, (error, user) => {
+        if(error) {
+            console.log(error)
+            res.redirect('/register')
+        } 
+        passport.authenticate('local')(req, res, () => {
+            res.redirect('/')
+        })
+    })
+})
 
 
 const PORT = process.env.PORT || 5000
