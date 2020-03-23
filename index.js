@@ -10,7 +10,7 @@ const app = express()
 
 
 mongoose.connect(
-    process.env.MONGODB_URL.replace('<password>', process.env.MONGODB_PASSWORD), 
+    process.env.MONGODB_URI.replace('<password>', process.env.MONGODB_PASSWORD), 
     { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
 )
 
@@ -31,7 +31,7 @@ passport.deserializeUser(User.deserializeUser())
 
 app.post('/register', (req, res) => {
     const createdUser = new User({ username: req.body.username })
-    
+
     User.register(createdUser, req.body.password, (error, user) => {
         if(error) {
             console.log(error)
