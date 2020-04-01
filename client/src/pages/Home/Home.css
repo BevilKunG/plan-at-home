@@ -1,3 +1,7 @@
 .brand {
     margin-top: calc(45vh - 56px);
 }
+
+.definition-text {
+    font-size: 24px;
+}
