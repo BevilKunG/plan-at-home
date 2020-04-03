@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {BrowserRouter,Switch ,Route} from 'react-router-dom'
 import Layout from './components/Layout'
-import {Home, Register, Login} from './pages'
+import {Home, Register, Login, Plan} from './pages'
 import axios from 'axios'
 
 class App extends Component {
@@ -40,6 +40,7 @@ class App extends Component {
                         <Route exact path="/" component={Home}/>
                         <Route path="/register" component={() => <Register setToken={this.setToken} />}/>
                         <Route path="/login" component={() => <Login setToken={this.setToken} />}/>
+                        <Route path="/plan" component={Plan}/>
                     </Switch>
                 </Layout>
             </BrowserRouter>
