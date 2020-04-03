@@ -9,11 +9,11 @@ const User = require('../../models/User')
 router.post(
     '/', 
     [
-        // check('username', 'Please enter a valid username')
-        // .not()
-        // .isEmpty(),
-        // check('email', 'Please enter a valid email').isEmail(),
-        // check('password', 'Please enter a valid password').isLength({ min: 6 })
+        check('username', 'Please enter a valid username')
+        .not()
+        .isEmpty(),
+        check('email', 'Please enter a valid email').isEmail(),
+        check('password', 'Please enter a valid password').isLength({ min: 6 })
     ],
     async (req, res) => {
         const errors = validationResult(req)
@@ -52,7 +52,7 @@ router.post(
 
             jwt.sign(
                 payload,
-                'randomString', 
+                'secret', 
                 { expiresIn: 10000 },
                 (error, token) => {
                     if(error) {
