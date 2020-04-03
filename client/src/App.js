@@ -17,7 +17,6 @@ class App extends Component {
     }
 
     setToken = (token) => {
-        console.log(token)
         this.setState({ token })
         this.fetchUser(token)
     }
@@ -40,7 +39,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/register" component={() => <Register setToken={this.setToken} />}/>
-                        <Route path="/login" component={Login}/>
+                        <Route path="/login" component={() => <Login setToken={this.setToken} />}/>
                     </Switch>
                 </Layout>
             </BrowserRouter>
