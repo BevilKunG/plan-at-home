@@ -27,7 +27,7 @@ class App extends Component {
                 token
             }
         }).then((res) => {
-            const {user} = res.data
+            const user = res.data
             this.setState({ user })
         })
     }
