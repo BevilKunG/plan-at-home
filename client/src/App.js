@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {BrowserRouter,Switch ,Route} from 'react-router-dom'
 import Layout from './components/Layout'
 import {Home, Register, Login, Plan} from './pages'
-import axios from 'axios'
+import {connect} from 'react-redux'
+import {fetchUser} from './actions'
 
 class App extends Component {
     state = {
@@ -12,25 +13,15 @@ class App extends Component {
 
     componentDidMount() {
         if(!this.state.user && this.state.token !== null) {
-            this.fetchUser(this.state.token)
+            this.props.fetchUser(this.state.token)
         }
     }
 
     setToken = (token) => {
         this.setState({ token })
-        this.fetchUser(token)
+        this.props.fetchUser(token)
     }
 
-    fetchUser = (token) => {
-        axios.get('/api/user', {
-            headers: {
-                token
-            }
-        }).then((res) => {
-            const user = res.data
-            this.setState({ user })
-        })
-    }
 
     render() {
         return (
@@ -48,4 +39,8 @@ class App extends Component {
     }
 }
 
-export default App
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps, {fetchUser})(App)
