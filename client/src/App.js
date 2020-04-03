@@ -24,13 +24,14 @@ class App extends Component {
 
 
     render() {
+        console.log(this.props)
         return (
             <BrowserRouter>
                 <Layout>
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route path="/register" component={() => <Register setToken={this.setToken} />}/>
-                        <Route path="/login" component={() => <Login setToken={this.setToken} />}/>
+                        <Route path="/login" component={Login}/>
                         <Route path="/plan" component={Plan}/>
                     </Switch>
                 </Layout>

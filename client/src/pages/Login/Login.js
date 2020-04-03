@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import qs from 'qs'
+import {connect} from 'react-redux'
+import {setToken, fetchUser} from '../../actions'
 import './Login.css'
 
 class Login extends Component {
@@ -17,6 +19,7 @@ class Login extends Component {
             password
         })).then((res) => {
             this.props.setToken(res.data.token)
+            this.props.fetchUser(res.data.token)
         })
     }
 
@@ -56,4 +59,8 @@ class Login extends Component {
     }
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps, {setToken, fetchUser})(Login)

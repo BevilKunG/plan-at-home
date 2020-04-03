@@ -1,5 +1,12 @@
 import axios from 'axios'
-import {FETCH_USER} from './types'
+import {SET_TOKEN, FETCH_USER} from './types'
+
+export const setToken = (token) => {
+    return {
+        type: SET_TOKEN,
+        payload: token
+    }
+}
 
 export const fetchUser = (token) => async dispatch => {
     const res = await axios.get('/api/user', {
@@ -8,8 +15,10 @@ export const fetchUser = (token) => async dispatch => {
         }
     })
 
+    const user = res.data
+
     return dispatch({ 
         type: FETCH_USER,
-        payload: res.data
+        payload: user
     })
 }
