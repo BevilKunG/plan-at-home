@@ -11,14 +11,16 @@ class Register extends Component {
         confirmPassword: ''
     }
 
-    onFormSubmit = async (e) => {
+    onFormSubmit = (e) => {
         e.preventDefault()
         const {username, email, password} = this.state
-        const {token} = await axios.post('/api/register', qs.stringify({
+        axios.post('/api/register', qs.stringify({
             username,
             email,
             password
-        }))
+        })).then((res) => {
+            this.props.setToken(res.data.token)
+        })
     }
 
     render() {
