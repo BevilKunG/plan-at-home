@@ -13,9 +13,7 @@ mongoose.connect(
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/register', require('./routes/register'))
-app.use('/login', require('./routes/login'))
-app.use('/user', require('./routes/user'))
+app.use('/api', require('./routes/api/index'))
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
