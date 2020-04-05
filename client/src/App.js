@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {BrowserRouter,Switch ,Route} from 'react-router-dom'
+import {BrowserRouter,Switch} from 'react-router-dom'
 import Layout from './components/Layout'
 import {Home, Register, Login, Plan} from './pages'
 import {PublicRoute, PrivateRoute} from './components/Route'
@@ -36,6 +36,9 @@ class App extends Component {
                             component={Login}/>
                         <PrivateRoute 
                             path="/plan" 
+                            component={Plan}/>
+                        <PublicRoute 
+                            path="/plann" 
                             component={Plan}/>
                     </Switch>
                 </Layout>

@@ -1,9 +1,12 @@
 import React from 'react'
+import {PlanCard} from '../../components/Plan'
 
 const Plan = () => {
     return (
         <div>
-            <h1>Plan</h1>
+            <div className="mx-auto my-2">
+                <PlanCard />
+            </div>
         </div>
     )
 }
