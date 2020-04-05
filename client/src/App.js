@@ -4,10 +4,15 @@ import Layout from './components/Layout'
 import {Home, Register, Login, Plan} from './pages'
 import {PublicRoute, PrivateRoute} from './components/Route'
 import {connect} from 'react-redux'
-import {fetchUser} from './actions'
+import {setToken, fetchUser} from './actions'
 
 class App extends Component {
     componentDidMount() {
+        const token = localStorage.getItem('token')
+        if(token) {
+            this.props.setToken(token)
+            this.props.fetchUser(token)
+        }
     }
 
     render() {
@@ -43,4 +48,4 @@ const mapStateToProps = (state) => {
     return state
 }
 
-export default connect(mapStateToProps, {fetchUser})(App)
+export default connect(mapStateToProps, {setToken, fetchUser})(App)

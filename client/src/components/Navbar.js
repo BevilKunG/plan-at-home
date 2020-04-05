@@ -7,6 +7,7 @@ class Navbar extends Component {
     logout = () => {
         this.props.setToken(null)
         this.props.setUser(null)
+        localStorage.removeItem('token')
     }
 
     renderAuthButton() {

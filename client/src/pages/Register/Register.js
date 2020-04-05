@@ -23,6 +23,7 @@ class Register extends Component {
         })).then((res) => {
             this.props.setToken(res.data.token)
             this.props.fetchUser(res.data.token)
+            localStorage.setItem('token', res.data.token)
         })
     }
 
