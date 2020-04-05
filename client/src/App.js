@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {BrowserRouter,Switch ,Route} from 'react-router-dom'
 import Layout from './components/Layout'
 import {Home, Register, Login, Plan} from './pages'
+import {PublicRoute, PrivateRoute} from './components/Route'
 import {connect} from 'react-redux'
 import {fetchUser} from './actions'
 
@@ -15,10 +16,22 @@ class App extends Component {
             <BrowserRouter>
                 <Layout>
                     <Switch>
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/register" component={Register}/>
-                        <Route path="/login" component={Login}/>
-                        <Route path="/plan" component={Plan}/>
+                        <PublicRoute 
+                            exact 
+                            restricted
+                            path="/" 
+                            component={Home}/>
+                        <PublicRoute
+                            restricted 
+                            path="/register" 
+                            component={Register}/>
+                        <PublicRoute
+                            restricted 
+                            path="/login" 
+                            component={Login}/>
+                        <PrivateRoute 
+                            path="/plan" 
+                            component={Plan}/>
                     </Switch>
                 </Layout>
             </BrowserRouter>
