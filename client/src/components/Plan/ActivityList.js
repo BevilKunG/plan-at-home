@@ -2,14 +2,13 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 
 class ActivityList extends Component {
-    renderActivity() {
-        
-    }
-
     render() {
-        <div>
-            {this.renderActivity()}
-        </div>
+        return this.props.activities.map((activity) => (
+            <div key={activity._id}>
+                <h1>{activity.name}</h1>
+                <h3>{activity.duration}</h3>
+            </div>
+        ))
     }
 }
 
