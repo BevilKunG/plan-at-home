@@ -67,7 +67,7 @@ router.post(
         } catch (error) {
             console.log(error)
             res.status(500)
-                .send('Error in saving')
+                .json({ message: 'Error in saving' })
         }
     }
 )

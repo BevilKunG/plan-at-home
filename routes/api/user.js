@@ -6,9 +6,9 @@ const User = require('../../models/User')
 router.get('/', auth, async (req, res) => {
     try {
         const user = await User.findById(req.user.id)
-        res.json(user)
+        res.json({ user })
     } catch (error) {
-        res.send({ message: 'Error in fetching user' })
+        res.json({ message: 'Error in fetching user' })
     }
 })
 

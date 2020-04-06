@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
         if(error) {
             res.status(500).json(error)
         }
-        res.status(200).json(plans)
+        res.status(200).json({ plans })
     })
 })
 
@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
         if(error) {
             res.status(500).json(error)
         }
-        res.status(201).json(plan)
+        res.status(201).json({ plan })
     })
 })
 
