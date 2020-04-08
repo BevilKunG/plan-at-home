@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addActivity} from '../../../actions'
+import {addActivity, deletePlan} from '../../../actions'
 import axios from 'axios'
 import qs from 'qs'
 
@@ -41,6 +41,10 @@ class ActivityForm extends Component {
         axios.post(`/api/plans/${this.props.planId}/activities`, qs.stringify({ activity }))
 
         this.clearState()
+    }
+
+    onPlanDelete = () => {
+        this.props.deletePlan(this.props.planId)
     }
 
     renderForm() {
@@ -101,8 +105,14 @@ class ActivityForm extends Component {
         return (
             <div className="text-center">
                 <button 
-                    className="btn btn-primary"
-                    onClick={() => this.handleFormShow(true)}>Add Activity</button>
+                    className="btn btn-primary mr-2"
+                    onClick={() => this.handleFormShow(true)}>New Activity</button>
+                <button 
+                    className="btn btn-warning mr-2"
+                    >Edit Plan</button>
+                <button 
+                    className="btn btn-danger"
+                    onClick={this.onPlanDelete}>Delete Plan</button>
             </div>
         )
     }
@@ -117,4 +127,4 @@ class ActivityForm extends Component {
     }
 }
 
-export default connect(null, {addActivity})(ActivityForm)
+export default connect(null, {addActivity, deletePlan})(ActivityForm)
