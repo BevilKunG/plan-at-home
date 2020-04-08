@@ -20,14 +20,8 @@ router.post('/', (req, res) => {
     })
 })
 
-// untest
 router.put('/:id', (req, res) => {
-    const {name, date, activities} = req.body
-    Plan.findByIdAndUpdate(req.params.id, {
-        name,
-        date,
-        activities
-    }, (error, plan) => {
+    Plan.findByIdAndUpdate(req.params.id, req.body.plan, (error, plan) => {
         if(error) {
             res.status(500).json(error)
         }
