@@ -39,7 +39,7 @@ class ActivityForm extends Component {
             duration
         }
 
-        this.props.addActivity(activity, this.props.plan._id)
+        this.props.addActivity(this.props.plan._id, activity)
         axios.post(`/api/plans/${this.props.plan._id}/activities`, qs.stringify({ activity }))
 
         this.clearState()

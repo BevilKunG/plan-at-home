@@ -86,11 +86,11 @@ export const deletePlan = (id) => {
     }
 }
 
-export const addActivity = (activity, planId) => {
+export const addActivity = (id, activity) => {
     return {
         type: ADD_ACTIVITY,
         payload: {
-            planId,
+            id,
             activity
         }
     }

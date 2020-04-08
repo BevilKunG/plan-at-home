@@ -26,7 +26,7 @@ export default (state = [], action) => {
 
         case ADD_ACTIVITY: return state.map(plan => {
             const {name,date,activities} = plan
-            if(plan._id === action.payload.planId) {
+            if(plan._id === action.payload.id) {
                 return {
                     name,
                     date,
