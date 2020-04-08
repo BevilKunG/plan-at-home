@@ -5,6 +5,7 @@ import {
     SET_TOKEN, 
     FETCH_PLANS,
     ADD_PLAN,
+    UPDATE_PLAN,
     DELETE_PLAN,
     ADD_ACTIVITY
 } from './types'
@@ -65,6 +66,16 @@ export const addPlan = (plan) => {
         }
     }
 }
+
+export const updatePlan = (id, plan) => {
+    return {
+        type: UPDATE_PLAN,
+        payload: {
+            id,
+            plan
+        }
+    }
+} 
 
 export const deletePlan = (id) => {
     return {

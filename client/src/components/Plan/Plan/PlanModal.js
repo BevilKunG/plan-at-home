@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Modal} from 'react-bootstrap'
-import {addPlan} from '../../../actions'
+import {addPlan, updatePlan} from '../../../actions'
 import axios from 'axios'
 import qs from 'qs'
 import {connect} from 'react-redux'
@@ -70,7 +70,7 @@ class PlanModal extends Component {
             activities
         }
 
-        // this.props.updatePlan(this.props.plan._id, plan)
+        this.props.updatePlan(this.props.plan._id, plan)
     }
     
 
@@ -172,4 +172,4 @@ const mapStateToProps = (state) => {
     return state
 }
 
-export default connect(mapStateToProps, {addPlan})(PlanModal)
+export default connect(mapStateToProps, {addPlan, updatePlan})(PlanModal)

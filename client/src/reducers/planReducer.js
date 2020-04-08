@@ -2,7 +2,8 @@ import {
     FETCH_PLANS, 
     ADD_PLAN, 
     DELETE_PLAN,
-    ADD_ACTIVITY 
+    ADD_ACTIVITY, 
+    UPDATE_PLAN
 } from '../actions/types'
 
 export default (state = [], action) => {
@@ -14,11 +15,18 @@ export default (state = [], action) => {
             action.payload.plan
         ]
 
+        case UPDATE_PLAN: return state.map(plan => {
+            if(plan._id === action.payload.id) {
+                return action.payload.plan
+            }
+            return plan
+        })
+
         case DELETE_PLAN: return state.filter(plan => plan._id !== action.payload.id)
 
         case ADD_ACTIVITY: return state.map(plan => {
             const {name,date,activities} = plan
-            if(plan._id == action.payload.planId) {
+            if(plan._id === action.payload.planId) {
                 return {
                     name,
                     date,
