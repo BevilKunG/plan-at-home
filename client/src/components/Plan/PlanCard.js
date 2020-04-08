@@ -4,40 +4,9 @@ import ActivityForm from './ActivityForm'
 
 class PlanCard extends Component {
     state = {
-        showForm: false
     }
 
-    renderForm() {
-        if(this.state.showForm) {
-            return (
-                <ActivityForm />
-            )
-        }
-        return null
-    }
-
-    renderAddButton() {
-        if(this.state.showForm) {
-            return (
-                <div className="text-center">
-                    <button 
-                        className="btn btn-secondary mr-5"
-                        onClick={() => this.setState({showForm: false})}>Cancel</button>
-                    <button 
-                        className="btn btn-primary"
-                        >Submit</button>
-                </div>
-            )
-        }
-        return (
-            <div className="text-center">
-                <button 
-                    className="btn btn-primary"
-                    onClick={() => this.setState({showForm: true})}>Add Activity</button>
-            </div>
-        )
-    }
-
+    
     renderDate() {
         const date = new Date(this.props.plan.date)
         return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
@@ -56,8 +25,7 @@ class PlanCard extends Component {
     
                 <div className="card-body">
                     <ActivityList activities={plan.activities}/>
-                    {this.renderForm()}
-                    {this.renderAddButton()}
+                    <ActivityForm planId={plan._id} />
                 </div>
             </div>
         )
