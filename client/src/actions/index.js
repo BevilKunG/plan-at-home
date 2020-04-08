@@ -20,14 +20,18 @@ export const fetchUser = (token) => async dispatch => {
 
     return dispatch({ 
         type: FETCH_USER,
-        payload: user
+        payload: {
+            user
+        }
     })
 }
 
 export const setUser = (user) => {
     return {
         type: SET_USER,
-        payload: user
+        payload: {
+            user
+        }
     }
 }
 
