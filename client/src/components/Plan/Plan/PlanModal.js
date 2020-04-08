@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Modal, Button} from 'react-bootstrap'
-import {addPlan} from '../../actions'
+import {addPlan} from '../../../actions'
 import axios from 'axios'
 import qs from 'qs'
 import {connect} from 'react-redux'

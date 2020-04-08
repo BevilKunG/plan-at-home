@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import ActivityList from './ActivityList'
-import ActivityForm from './ActivityForm'
+import ActivityList from '../Activity/ActivityList'
+import ActivityForm from '../Activity/ActivityForm'
 
 class PlanCard extends Component {
     state = {

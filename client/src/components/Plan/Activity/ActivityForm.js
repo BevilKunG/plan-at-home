@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {addActivity} from '../../actions'
+import {addActivity} from '../../../actions'
 
 class ActivityForm extends Component {
     state = {
