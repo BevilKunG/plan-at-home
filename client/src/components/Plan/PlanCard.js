@@ -21,11 +21,11 @@ class PlanCard extends Component {
             return (
                 <div className="text-center">
                     <button 
-                        className="btn btn-primary mr-5"
-                        >Submit</button>
-                    <button 
-                        className="btn btn-secondary"
+                        className="btn btn-secondary mr-5"
                         onClick={() => this.setState({showForm: false})}>Cancel</button>
+                    <button 
+                        className="btn btn-primary"
+                        >Submit</button>
                 </div>
             )
         }
