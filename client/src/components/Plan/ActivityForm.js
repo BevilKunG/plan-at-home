@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {addActivity} from '../../actions'
 
 class ActivityForm extends Component {
     state = {
@@ -23,7 +25,7 @@ class ActivityForm extends Component {
             name,
             duration
         }
-        console.log(this.props.planId)
+        this.props.addActivity(activity, this.props.planId)
     }
 
     renderForm() {
@@ -100,4 +102,4 @@ class ActivityForm extends Component {
     }
 }
 
-export default ActivityForm
+export default connect(null, {addActivity})(ActivityForm)

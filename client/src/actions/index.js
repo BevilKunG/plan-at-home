@@ -4,7 +4,8 @@ import {
     SET_USER, 
     SET_TOKEN, 
     FETCH_PLANS,
-    ADD_PLAN
+    ADD_PLAN,
+    ADD_ACTIVITY
 } from './types'
 
 export const fetchUser = (token) => async dispatch => {
@@ -51,5 +52,15 @@ export const addPlan = (plan) => {
     return {
         type: ADD_PLAN,
         payload: plan
+    }
+}
+
+export const addActivity = (activity, planId) => {
+    return {
+        type: ADD_ACTIVITY,
+        payload: {
+            planId,
+            activity
+        }
     }
 }
