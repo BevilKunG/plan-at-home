@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Modal, Button} from 'react-bootstrap'
+import {Modal} from 'react-bootstrap'
 import {addPlan} from '../../../actions'
 import axios from 'axios'
 import qs from 'qs'
@@ -116,5 +116,8 @@ class PlanModal extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return state
+}
 
-export default connect(null, {addPlan})(PlanModal)
+export default connect(mapStateToProps, {addPlan})(PlanModal)

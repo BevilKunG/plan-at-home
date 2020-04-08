@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {addActivity} from '../../../actions'
+import axios from 'axios'
+import qs from 'qs'
 
 class ActivityForm extends Component {
     state = {
@@ -8,6 +10,15 @@ class ActivityForm extends Component {
         start: '',
         end: '',
         formShow: false,
+    }
+
+    clearState = () => {
+        this.setState({
+            name: '',
+            start: '',
+            end: '',
+            formShow: false,
+        })
     }
 
     handleFormShow = (formShow) => {
@@ -25,7 +36,11 @@ class ActivityForm extends Component {
             name,
             duration
         }
+
         this.props.addActivity(activity, this.props.planId)
+        axios.post(`/api/plans/${this.props.planId}/activities`, qs.stringify({ activity }))
+
+        this.clearState()
     }
 
     renderForm() {
