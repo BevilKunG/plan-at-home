@@ -25,7 +25,7 @@ class PlanCard extends Component {
     
                 <div className="card-body">
                     <ActivityList activities={plan.activities}/>
-                    <ActivityForm planId={plan._id} />
+                    <ActivityForm plan={plan} />
                 </div>
             </div>
         )

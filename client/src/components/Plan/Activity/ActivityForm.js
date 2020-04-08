@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PlanModal from '../Plan/PlanModal'
 import {connect} from 'react-redux'
 import {addActivity, deletePlan} from '../../../actions'
 import axios from 'axios'
@@ -10,6 +11,7 @@ class ActivityForm extends Component {
         start: '',
         end: '',
         formShow: false,
+        modalShow: false
     }
 
     clearState = () => {
@@ -37,15 +39,19 @@ class ActivityForm extends Component {
             duration
         }
 
-        this.props.addActivity(activity, this.props.planId)
-        axios.post(`/api/plans/${this.props.planId}/activities`, qs.stringify({ activity }))
+        this.props.addActivity(activity, this.props.plan._id)
+        axios.post(`/api/plans/${this.props.plan._id}/activities`, qs.stringify({ activity }))
 
         this.clearState()
     }
 
     onPlanDelete = () => {
-        this.props.deletePlan(this.props.planId)
-        axios.delete(`/api/plans/${this.props.planId}`)
+        this.props.deletePlan(this.props.plan._id)
+        axios.delete(`/api/plans/${this.props.plan._id}`)
+    }
+
+    hideModal = () => {
+        this.setState({ modalShow: false })
     }
 
     renderForm() {
@@ -104,13 +110,13 @@ class ActivityForm extends Component {
             )
         }
         return (
-            <div className="text-center">
+            <div className="text-right">
                 <button 
                     className="btn btn-primary mr-2"
                     onClick={() => this.handleFormShow(true)}>New Activity</button>
                 <button 
                     className="btn btn-warning mr-2"
-                    >Edit Plan</button>
+                    onClick={() => this.setState({ modalShow: true })}>Edit Plan</button>
                 <button 
                     className="btn btn-danger"
                     onClick={this.onPlanDelete}>Delete Plan</button>
@@ -123,6 +129,10 @@ class ActivityForm extends Component {
             <form onSubmit={this.onFormSubmit}>
                 {this.renderForm()}
                 {this.renderButton()}
+                <PlanModal
+                    plan={this.props.plan}
+                    show={this.state.modalShow}
+                    hideModal={this.hideModal} />
             </form>
         )
     }

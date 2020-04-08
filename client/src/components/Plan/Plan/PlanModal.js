@@ -22,8 +22,24 @@ class PlanModal extends Component {
         })
     }
 
+    resetState = () => {
+        const {name} = this.props.plan
+        const date = new Date(this.props.plan.date)
+        const d = `${date.getDate()}`
+        const m = `${date.getMonth()+1}`
+        const y = `${date.getFullYear()}`
+        this.setState({
+            name,
+            d,
+            m,
+            y
+        })
+    }
+
     onHide = () => {
-        this.clearState()
+        if(!this.props.plan) {
+            this.clearState()
+        }
         this.props.hideModal()
     }
 
@@ -42,6 +58,44 @@ class PlanModal extends Component {
         axios.post('/api/plans', qs.stringify({ plan }))
 
         this.onHide()
+    }
+
+    updatePlan = () => {
+        const {name, d, m, y} = this.state
+        const date = new Date(`${y}-${m}-${d}`)
+        const {activities} = this.props.plan
+        const plan = {
+            name,
+            date,
+            activities
+        }
+
+        // this.props.updatePlan(this.props.plan._id, plan)
+    }
+    
+
+    componentDidMount() {
+        if(!this.props.plan) {
+            this.clearState()
+        } else {
+            this.resetState()
+        }
+    }
+
+    renderButton() {
+        if(!this.props.plan) {
+            return (
+                <button 
+                    className="btn btn-primary"
+                    onClick={this.addPlan}>Add</button>
+            )
+        }
+        return (
+            <button 
+                className="btn btn-warning"
+                onClick={this.updatePlan}>Update</button>
+        )
+        
     }
 
     render() {
@@ -107,9 +161,7 @@ class PlanModal extends Component {
                     <button 
                         className="btn btn-secondary"
                         onClick={this.onHide}>Close</button>
-                    <button 
-                        className="btn btn-primary"
-                        onClick={this.addPlan}>Add</button>
+                    {this.renderButton()}
                 </Modal.Footer>
             </Modal>
         )

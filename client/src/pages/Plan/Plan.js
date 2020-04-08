@@ -5,7 +5,7 @@ import {fetchPlans} from '../../actions/index'
 
 class Plan extends Component {
     state={
-        showModal: false
+        modalShow: false
     }
 
     componentDidMount() {
@@ -13,7 +13,7 @@ class Plan extends Component {
     }
 
     hideModal = () => {
-        this.setState({ showModal: false })
+        this.setState({ modalShow: false })
     }
 
     render() {
@@ -22,11 +22,11 @@ class Plan extends Component {
                 <div className="text-right mt-2">
                     <button 
                         className="btn btn-primary"
-                        onClick={() => this.setState({ showModal: true })}>Add Plan</button>
+                        onClick={() => this.setState({ modalShow: true })}>Add Plan</button>
                 </div>
                 <PlanList />
                 <PlanModal 
-                    show={this.state.showModal}
+                    show={this.state.modalShow}
                     hideModal={this.hideModal} />
             </div>
         )
