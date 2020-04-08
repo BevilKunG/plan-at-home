@@ -39,7 +39,7 @@ class PlanModal extends Component {
         }
 
         this.props.addPlan(plan)
-        axios.post('/api/plans', qs.stringify(plan))
+        axios.post('/api/plans', qs.stringify({ plan }))
 
         this.onHide()
     }

@@ -12,12 +12,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    const {name, date, activities} = req.body
-    Plan.create({
-        name,
-        date,
-        activities
-    }, (error, plan) => {
+    Plan.create(req.body.plan, (error, plan) => {
         if(error) {
             res.status(500).json(error)
         }
