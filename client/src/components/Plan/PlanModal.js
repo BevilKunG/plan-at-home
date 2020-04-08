@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {Modal, Button} from 'react-bootstrap'
+import {addPlan} from '../../actions'
 import axios from 'axios'
 import qs from 'qs'
+import {connect} from 'react-redux'
 
 class PlanModal extends Component {
     state = {
@@ -25,13 +27,20 @@ class PlanModal extends Component {
         this.props.hideModal()
     }
 
+
     addPlan = () => {
         const {name, d, m, y} = this.state
         const date = new Date(`${y}-${m}-${d}`)
-        axios.post('/api/plans', qs.stringify({
+        const activities = []
+        const plan = {
             name,
-            date
-        }))
+            date,
+            activities
+        }
+
+        this.props.addPlan(plan)
+        axios.post('/api/plans', qs.stringify(plan))
+
         this.onHide()
     }
 
@@ -107,4 +116,5 @@ class PlanModal extends Component {
     }
 }
 
-export default PlanModal
+
+export default connect(null, {addPlan})(PlanModal)

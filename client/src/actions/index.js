@@ -46,3 +46,10 @@ export const fetchPlans = () => async dispatch => {
         payload: plans
     })
 }
+
+export const addPlan = (plan) => {
+    return {
+        type: ADD_PLAN,
+        payload: plan
+    }
+}
