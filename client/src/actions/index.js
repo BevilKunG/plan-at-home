@@ -1,24 +1,11 @@
 import axios from 'axios'
 import {
-    SET_TOKEN, 
-    SET_USER, 
     FETCH_USER,
-    FETCH_PLANS
+    SET_USER, 
+    SET_TOKEN, 
+    FETCH_PLANS,
+    ADD_PLAN
 } from './types'
-
-export const setToken = (token) => {
-    return {
-        type: SET_TOKEN,
-        payload: token
-    }
-}
-
-export const setUser = (user) => {
-    return {
-        type: SET_USER,
-        payload: user
-    }
-}
 
 export const fetchUser = (token) => async dispatch => {
     const res = await axios.get('/api/user', {
@@ -33,6 +20,20 @@ export const fetchUser = (token) => async dispatch => {
         type: FETCH_USER,
         payload: user
     })
+}
+
+export const setUser = (user) => {
+    return {
+        type: SET_USER,
+        payload: user
+    }
+}
+
+export const setToken = (token) => {
+    return {
+        type: SET_TOKEN,
+        payload: token
+    }
 }
 
 export const fetchPlans = () => async dispatch => {
