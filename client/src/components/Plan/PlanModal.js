@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {Modal, Button} from 'react-bootstrap'
+import axios from 'axios'
+import qs from 'qs'
 
 class PlanModal extends Component {
     state = {
@@ -21,6 +23,16 @@ class PlanModal extends Component {
     onHide = () => {
         this.clearState()
         this.props.hideModal()
+    }
+
+    addPlan = () => {
+        const {name, d, m, y} = this.state
+        const date = new Date(`${y}-${m}-${d}`)
+        axios.post('/api/plans', qs.stringify({
+            name,
+            date
+        }))
+        this.onHide()
     }
 
     render() {
@@ -86,7 +98,9 @@ class PlanModal extends Component {
                     <button 
                         className="btn btn-secondary"
                         onClick={this.onHide}>Close</button>
-                    <button className="btn btn-primary">Add</button>
+                    <button 
+                        className="btn btn-primary"
+                        onClick={this.addPlan}>Add</button>
                 </Modal.Footer>
             </Modal>
         )
