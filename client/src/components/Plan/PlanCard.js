@@ -40,7 +40,7 @@ class PlanCard extends Component {
 
     renderDate() {
         const date = new Date(this.props.plan.date)
-        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+        return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
     }
 
     render() {
