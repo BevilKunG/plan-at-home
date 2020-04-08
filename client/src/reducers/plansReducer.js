@@ -7,11 +7,11 @@ import {
 
 export default (state = [], action) => {
     switch(action.type) {
-        case FETCH_PLANS: return action.payload
+        case FETCH_PLANS: return action.payload.plans
 
         case ADD_PLAN: return [
             ...state,
-            action.payload
+            action.payload.plan
         ]
 
         case DELETE_PLAN: return state.filter(plan => plan._id !== action.payload.id)
