@@ -45,6 +45,7 @@ class ActivityForm extends Component {
 
     onPlanDelete = () => {
         this.props.deletePlan(this.props.planId)
+        axios.delete(`/api/plans/${this.props.planId}`)
     }
 
     renderForm() {
