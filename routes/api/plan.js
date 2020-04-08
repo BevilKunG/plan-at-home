@@ -25,6 +25,25 @@ router.post('/', (req, res) => {
     })
 })
 
+router.post('/:id/activities', (req, res) => {
+    const {activity} = req.body
+    Plan.findById(req.params.id, async (error, plan) => {
+        if(error) {
+            res.status(500).json(error)
+        }
+
+        const {activities} = plan
+        plan.activities = [
+            ...activities,
+            activity
+        ]
+        await plan.save()
+
+        res.status(200).json({ plan })
+
+    })
+})
+
 router.post('/push', (req, res) => {
     const plans = [
         {
