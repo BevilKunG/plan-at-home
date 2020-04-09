@@ -8,10 +8,6 @@ class Plan extends Component {
         modalShow: false
     }
 
-    componentDidMount() {
-        this.props.fetchPlans()
-    }
-
     hideModal = () => {
         this.setState({ modalShow: false })
     }

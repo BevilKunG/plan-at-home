@@ -45,8 +45,12 @@ export const setToken = (token) => {
     }
 }
 
-export const fetchPlans = () => async dispatch => {
-    const res = await axios.get('/api/plans')
+export const fetchPlans = (token) => async dispatch => {
+    const res = await axios.get('/api/plans', {
+        headers: {
+            token
+        }
+    })
 
     const {plans} = res.data
     

@@ -106,10 +106,12 @@ class PlanModal extends Component {
         const {name, d, m, y} = this.state
         const date = new Date(`${y}-${m}-${d}`)
         const activities = []
+        const owner = this.props.user
         const plan = {
             name,
             date,
-            activities
+            activities,
+            owner
         }
 
         this.props.addPlan(plan)
@@ -124,10 +126,12 @@ class PlanModal extends Component {
         const {name, d, m, y} = this.state
         const date = new Date(`${y}-${m}-${d}`)
         const {activities} = this.props.plan
+        const owner = this.props.user
         const plan = {
             name,
             date,
-            activities
+            activities,
+            owner
         }
 
         this.props.updatePlan(this.props.plan._id, plan)

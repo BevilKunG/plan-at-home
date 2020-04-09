@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const auth = require('../../middleware/auth')
 const Plan = require('../../models/Plan')
 
-router.get('/', (req, res) => {
-    Plan.find({}, (error, plans) => {
+router.get('/', auth, (req, res) => {
+    Plan.find({ owner: req.user.id }, (error, plans) => {
         if(error) {
             res.status(500).json(error)
         }

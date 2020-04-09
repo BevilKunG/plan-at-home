@@ -7,13 +7,13 @@ import {connect} from 'react-redux'
 import {setToken, fetchUser, fetchPlans} from './actions'
 
 class App extends Component {
-    componentDidMount() {
+    async componentDidMount() {
         const token = localStorage.getItem('token')
         if(token) {
-            this.props.setToken(token)
-            this.props.fetchUser(token)
+            if(!this.props.token) this.props.setToken(token)
+            if(!this.props.user) this.props.fetchUser(token)
+            if(this.props.plans.length === 0) this.props.fetchPlans(token)
         }
-        this.props.fetchPlans()
     }
 
     render() {
