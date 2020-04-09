@@ -20,11 +20,11 @@ const About = () => {
                         <span>610610598</span>
                     </p>
                     <p>
-                        <span className="mr-5">Parinya Pradit</span>
+                        <span className="mr-5">Pongthorn Sitthipongsathorn</span>
                         <span>610610600</span>
                     </p>
                     <p>
-                        <span className="mr-5">Parinya Pradit</span>
+                        <span className="mr-5">Patthanan Sakulyuenyong</span>
                         <span>610610602</span>
                     </p>
                 </div>
