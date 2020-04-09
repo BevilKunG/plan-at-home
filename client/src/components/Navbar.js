@@ -26,6 +26,9 @@ class Navbar extends Component {
 
         return (
             <div>
+                    <Link 
+                        className="btn btn-outline-light mr-2" 
+                        to="/profile">{this.props.user.username}</Link>
                     <button 
                         className="btn btn-outline-light mr-2" 
                         onClick={this.logout}>Logout</button>

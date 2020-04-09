@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {BrowserRouter,Switch} from 'react-router-dom'
 import Layout from './components/Layout'
-import {Home, Register, Login, Plan} from './pages'
+import {Home, Register, Login, Plan, About,Profile} from './pages'
 import {PublicRoute, PrivateRoute} from './components/Route'
 import {connect} from 'react-redux'
 import {setToken, fetchUser, fetchPlans} from './actions'
@@ -37,6 +37,12 @@ class App extends Component {
                         <PrivateRoute 
                             path="/plan" 
                             component={Plan}/>
+                        <PrivateRoute
+                            path="/profile"
+                            component={Profile}/>
+                        <PublicRoute
+                            path="/about"
+                            component={About}/>
                         <PublicRoute 
                             path="/plann" 
                             component={Plan}/>
