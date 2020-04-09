@@ -1,17 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import Activity from './Activity'
 
 class ActivityList extends Component {
     render() {
         return this.props.activities.map((activity) => (
-            <div 
-                key={activity._id}
-                className="card my-2">
-                <div className="card-body">
-                    <h5 className="card-title">{activity.name}</h5>
-                    <h5 className="card-subtitle">{activity.duration}</h5>
-                </div>
-            </div>
+            <Activity activity={activity} />
         ))
     }
 }
