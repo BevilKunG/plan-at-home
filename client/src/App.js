@@ -8,7 +8,7 @@ import {setToken, fetchUser, fetchPlans} from './actions'
 
 class App extends Component {
     async componentDidMount() {
-        const token = localStorage.getItem('token')
+        const token = this.props.token || localStorage.getItem('token')
         if(token) {
             if(!this.props.token) this.props.setToken(token)
             if(!this.props.user) this.props.fetchUser(token)
