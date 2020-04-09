@@ -53,7 +53,7 @@ router.post(
             jwt.sign(
                 payload,
                 'secret', 
-                { expiresIn: 10000 },
+                { expiresIn: '7d' },
                 (error, token) => {
                     if(error) {
                         throw error
