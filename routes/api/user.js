@@ -12,4 +12,13 @@ router.get('/', auth, async (req, res) => {
     }
 })
 
+router.put('/:id', (req, res) => {
+    User.findByIdAndUpdate(req.params.id, req.body.user, (error, user) => {
+        if(error) {
+            res.status(500).json(error)
+        }
+        res.status(200).json({ user })
+    })
+})
+
 module.exports = router

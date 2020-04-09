@@ -18,7 +18,7 @@ class Plan extends Component {
                 <div className="text-right mt-2">
                     <button 
                         className="btn btn-primary"
-                        onClick={() => this.setState({ modalShow: true })}>Add Plan</button>
+                        onClick={() => this.setState({ modalShow: true })}>New Plan</button>
                 </div>
                 <PlanList />
                 <PlanModal 

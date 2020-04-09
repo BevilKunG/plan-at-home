@@ -178,7 +178,7 @@ class PlanModal extends Component {
                 show={this.props.show}
                 onHide={this.onHide}>
                 <Modal.Header closeButton>
-                    <Modal.Title>New Plan</Modal.Title>
+                    <Modal.Title>{!this.props.plan?'New Plan':'Update Plan'}</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>

@@ -9,7 +9,7 @@ class ProfileCard extends Component {
                 <div className="card-body">
                     <div className="row text-center">
                         <div className="col-2"> 
-                            <h5>Username</h5>
+                            <h5>Name</h5>
                         </div>
                         <div className="col-10"> 
                             <h5>{this.props.user.username}</h5>
@@ -26,7 +26,9 @@ class ProfileCard extends Component {
                     </div>
 
                     <div className="text-right">
-                        <button className="btn btn-warning">Edit</button>
+                        <button 
+                            className="btn btn-warning"
+                            onClick={this.props.showModal}>Edit</button>
                     </div>
 
                 </div>

@@ -1,14 +1,31 @@
-import React from 'react'
-import {ProfileCard} from '../../components/Profile'
+import React, {Component} from 'react'
+import {ProfileCard, ProfileModal} from '../../components/Profile'
 
-const Profile = () => {
-    return (
-        <div>
+class Profile extends Component {
+    state = {
+        modalShow: false
+    }
+
+    showModal = () => {
+        this.setState({ modalShow: true })
+    }
+
+    hideModal = () => {
+        this.setState({ modalShow: false })
+    }
+
+    render() {
+        return (
             <div>
-                <ProfileCard />
+                <div>
+                    <ProfileCard showModal={this.showModal} />
+                    <ProfileModal 
+                        show={this.state.modalShow}
+                        hideModal={this.hideModal} />
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Profile
