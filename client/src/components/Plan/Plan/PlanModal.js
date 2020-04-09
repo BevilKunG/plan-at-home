@@ -136,6 +136,8 @@ class PlanModal extends Component {
 
         this.props.updatePlan(this.props.plan._id, plan)
         axios.put(`/api/plans/${this.props.plan._id}`, qs.stringify({ plan }))
+
+        this.onHide()
     }
     
 
