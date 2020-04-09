@@ -1,5 +1,10 @@
 const mongoose = require('mongoose')
-const ActivitySchema = require('./Schema/Activity')
+// const ActivitySchema = require('./Schema/Activity')
+
+const ActivitySchema = mongoose.Schema({
+    name: String,
+    duration: String
+})
 
 const PlanSchema = mongoose.Schema({
     name: String,
