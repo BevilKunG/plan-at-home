@@ -55,6 +55,36 @@ router.post('/:id/activities', async (req, res) => {
     })
 })
 
+//
+router.put('/:id/activities/:activityId', async (req, res) => {
+    Plan.findById(req.params.id, async (error, plan) => {
+        if(error) {
+            res.status(500).json(error)
+        }
+
+        plan.activities = plan.activities.map(activity => {
+            if(activity._id !== req.params.activityId) {
+                return activity
+            }
+            return req.body.activity
+        })
+        
+        const updatedPlan = await plan.save()
+        res.status(200).json({ plan: updatedPlan })
+    })
+})
+
+router.delete('/:id/activities/:activityId', async (req, res) => {
+    Plan.findById(req.params.id, async (error, plan) => {
+        if(error) {
+            res.status(500).json(error)
+        }
+
+        plan.activities = plan.activities.filter(activity => activity._id !== req.params.activityId)
+        const updatedPlan = await plan.save()
+        res.status(200).json({ plan: updatedPlan })
+    })
+})
 // router.post('/push', (req, res) => {
 //     const plans = [
 //         {
