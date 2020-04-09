@@ -11,10 +11,15 @@ class ActivityForm extends Component {
         start: '',
         end: '',
         formShow: false,
-        modalShow: false
+        modalShow: false,
+        errorMessage: '',
+        nameError: false,
+        startError: false,
+        endError: false
     }
 
     clearState = () => {
+        this.clearError()
         this.setState({
             name: '',
             start: '',
@@ -23,7 +28,17 @@ class ActivityForm extends Component {
         })
     }
 
+    clearError = () => {
+        this.setState({
+            errorMessage: '',
+            nameError: false,
+            startError: false,
+            endError: false 
+        })
+    }
+
     handleFormShow = (formShow) => {
+        if(!formShow) this.clearState()
         this.setState({ formShow })
     }
 
@@ -32,6 +47,8 @@ class ActivityForm extends Component {
     }
 
     onActivitySubmit = (e) => {
+        if(!this.validateActivity()) return 
+
         const {name, start, end} = this.state
         const duration = `${start}-${end}`
         const activity = {
@@ -50,8 +67,47 @@ class ActivityForm extends Component {
         axios.delete(`/api/plans/${this.props.plan._id}`)
     }
 
+    validateActivity = () => {
+        this.clearError()
+
+        const {name, start, end} = this.state
+        if(!/[a-z A-Z 0-9]+/g.test(name)) {
+            this.setState({
+                errorMessage: 'Invalid name',
+                nameError: true
+            })
+            return false
+        }
+
+        if(start.length === 0) {
+            this.setState({
+                errorMessage: 'Invalid start time',
+                startError: true
+            })
+            return false
+        }
+
+        if(end.length === 0) {
+            this.setState({
+                errorMessage: 'Invalid end time',
+                endError: true
+            })
+            return false
+        }
+        return true
+    }
+
     hideModal = () => {
         this.setState({ modalShow: false })
+    }
+
+    renderAlert() {
+        if(!this.state.errorMessage) return null
+        return (
+            <div className="alert alert-danger">
+                {this.state.errorMessage}
+            </div>
+        )
     }
 
     renderForm() {
@@ -62,7 +118,7 @@ class ActivityForm extends Component {
                         <label>Name</label>
                         <input 
                             type="text" 
-                            className="form-control"
+                            className={`form-control ${this.state.nameError?'is-invalid':''}`}
                             placeholder="Name" 
                             value={this.state.name}
                             onChange={(e) => this.setState({name: e.target.value})} />
@@ -73,7 +129,7 @@ class ActivityForm extends Component {
                                 <label>Start</label>
                                 <input 
                                     type="time" 
-                                    className="form-control"
+                                    className={`form-control ${this.state.startError?'is-invalid':''}`}
                                     value={this.state.start}
                                     onChange={(e) => this.setState({start: e.target.value})} />
                             </div>
@@ -84,7 +140,7 @@ class ActivityForm extends Component {
                                 <label>End</label>
                                 <input 
                                     type="time" 
-                                    className="form-control"
+                                    className={`form-control ${this.state.endError?'is-invalid':''}`}
                                     value={this.state.end}
                                     onChange={(e) => this.setState({end: e.target.value})} />
                             </div>
@@ -127,6 +183,7 @@ class ActivityForm extends Component {
     render() {
         return (
             <form onSubmit={this.onFormSubmit}>
+                {this.renderAlert()}
                 {this.renderForm()}
                 {this.renderButton()}
                 <PlanModal
