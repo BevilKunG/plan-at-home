@@ -4,45 +4,36 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const router = express.Router()
 
-const User = require('../models/User')
+const User = require('../../models/User')
 
 router.post(
     '/', 
     [
-        check('username', 'Please enter a valid username')
-        .not()
-        .isEmpty(),
         check('email', 'Please enter a valid email').isEmail(),
         check('password', 'Please enter a valid password').isLength({ min: 6 })
     ],
     async (req, res) => {
         const errors = validationResult(req)
+
         if(!errors.isEmpty()) {
             return res.status(400)
-                .json({ errors: errors.array()})
+                .json({ errors: errors.array() })
         }
 
-        const {
-            username,
-            email,
-            password
-        } = req.body
+        const { email, password } = req.body
+
         try {
-            const existingUser = await User.findOne({ email })
-            if(existingUser) {
+            const user = await User.findOne({ email })
+            if(!user) {
                 return res.status(400)
-                    .json({ message: 'User already exists' })
+                    .json({ message: 'User not exist' })
             }
 
-            const user = new User({
-                username,
-                email,
-                password
-            })
-
-            const salt = await bcrypt.genSalt(10)
-            user.password = await bcrypt.hash(password, salt)
-            await user.save()
+            const isMatch = await bcrypt.compare(password, user.password)
+            if(!isMatch) {
+                return res.status(400)
+                    .json({ message: 'Invalid password' })
+            }
 
             const payload = {
                 user: {
@@ -52,8 +43,8 @@ router.post(
 
             jwt.sign(
                 payload,
-                'randomString', 
-                { expiresIn: 10000 },
+                'secret',
+                { expiresIn: '7d' },
                 (error, token) => {
                     if(error) {
                         throw error
@@ -66,9 +57,12 @@ router.post(
 
         } catch (error) {
             console.log(error)
+
             res.status(500)
-                .send('Error in saving')
+                .json({ message: 'Server error' })
+            
         }
+
     }
 )
 

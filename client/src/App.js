@@ -1,20 +1,60 @@
-import React from 'react'
-import {BrowserRouter,Switch ,Route} from 'react-router-dom'
+import React, {Component} from 'react'
+import {BrowserRouter,Switch} from 'react-router-dom'
 import Layout from './components/Layout'
-import {Home, Register, Login} from './pages'
+import {Home, Register, Login, Plan, About,Profile} from './pages'
+import {PublicRoute, PrivateRoute} from './components/Route'
+import {connect} from 'react-redux'
+import {setToken, fetchUser, fetchPlans} from './actions'
 
-const App = () => {
-    return (
-        <BrowserRouter>
-            <Layout>
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Route path="/register" component={Register}/>
-                    <Route path="/login" component={Login}/>
-                </Switch>
-            </Layout>
-        </BrowserRouter>
-    )
+class App extends Component {
+    async componentDidMount() {
+        const token = this.props.token || localStorage.getItem('token')
+        if(token) {
+            if(!this.props.token) this.props.setToken(token)
+            if(!this.props.user) this.props.fetchUser(token)
+            if(this.props.plans.length === 0) this.props.fetchPlans(token)
+        }
+    }
+
+    render() {
+        return (
+            <BrowserRouter>
+                <Layout>
+                    <Switch>
+                        <PublicRoute 
+                            exact 
+                            restricted
+                            path="/" 
+                            component={Home}/>
+                        <PublicRoute
+                            restricted 
+                            path="/register" 
+                            component={Register}/>
+                        <PublicRoute
+                            restricted 
+                            path="/login" 
+                            component={Login}/>
+                        <PrivateRoute 
+                            path="/plan" 
+                            component={Plan}/>
+                        <PrivateRoute
+                            path="/profile"
+                            component={Profile}/>
+                        <PublicRoute
+                            path="/about"
+                            component={About}/>
+                        <PublicRoute 
+                            path="/plann" 
+                            component={Plan}/>
+                    </Switch>
+                </Layout>
+            </BrowserRouter>
+        )
+    }
 }
 
-export default App
+const mapStateToProps = (state) => {
+    return state
+}
+
+export default connect(mapStateToProps, {setToken, fetchUser, fetchPlans})(App)
