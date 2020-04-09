@@ -1,7 +1,23 @@
-.brand {
-    margin-top: calc(45vh - 56px);
+.brand-box {
+    position: absolute;
+    top: 45vh;
+    left: 35vw;
 }
 
 .definition-text {
     font-size: 24px;
+}
+
+.home-background {
+    position: absolute;
+    width: 100vw;
+    height: calc(100vh - 56px);
+    top: 56px;
+    left: 0;
+    background-image: url('../../images/home-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px);
+    opacity: 80%; 
 }
