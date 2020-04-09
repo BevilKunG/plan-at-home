@@ -1,9 +1,12 @@
 import React from 'react'
+import {ProfileCard} from '../../components/Profile'
 
 const Profile = () => {
     return (
         <div>
-            <h1>Profile</h1>
+            <div>
+                <ProfileCard />
+            </div>
         </div>
     )
 }
