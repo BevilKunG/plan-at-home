@@ -1,10 +1,5 @@
 const mongoose = require('mongoose')
-// const ActivitySchema = require('./Schema/Activity')
-
-const ActivitySchema = mongoose.Schema({
-    name: String,
-    duration: String
-})
+const ActivitySchema = require('./schema/Activity')
 
 const PlanSchema = mongoose.Schema({
     name: String,
