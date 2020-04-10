@@ -14,6 +14,7 @@
     height: calc(100vh - 56px);
     top: 56px;
     left: 0;
+    background-image: url(./home-background.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
