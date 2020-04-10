@@ -1,5 +1,5 @@
 import React from 'react'
-import homeBackgroundImg from '../../images/home-background.jpg'
+import homeBackgroundImg from './home-background.jpg'
 import './Home.css'
 
 const Home = () => {
